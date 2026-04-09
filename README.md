@@ -1,5 +1,7 @@
 # GitHub Explorer 🕵️‍♂️
 
+**Live Demo:** [https://github-explorer-for-evabharat.vercel.app/](https://github-explorer-for-evabharat.vercel.app/)
+
 Hey there! 👋 Welcome to **GitHub Explorer**. 
 
 I built this project to make searching through GitHub users and browsing their repositories a breeze. Whether you're looking up a developer friend, exploring open-source creators, or just hunting for cool new repos, this app's got your back.
