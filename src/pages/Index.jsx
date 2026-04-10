@@ -16,33 +16,21 @@ import { useSearchUsers, useUserRepos } from "../hooks/useGitHub";
 import { useBookmarks } from "../hooks/useBookmarks";
 import { useTheme } from "../hooks/useTheme";
 
-/**
- * Index Page Component
- *
- * This is the main orchestrator component of the application. It acts as the
- * "smart" container, maintaining the application's core state and business logic.
- *
- * Key Responsibilities:
- * - Manages the master search state and debounces user inputs via `useDebounce`.
- * - Interacts with custom hooks (`useSearchUsers`, `useUserRepos`, `useBookmarks`, `useTheme`)
- *   to fetch data and manage side-effects.
- * - Handles the display logic toggling between the User Search View,
- *   the User Repositories View, and the Bookmarks View.
- * - Manages pagination (infinite scrolling) for repositories using the Intersection Observer API.
- * - Manages client-side sorting and filtering for the displayed repositories list.
- */
-
 const Index = () => {
   const { dark, toggle: toggleTheme } = useTheme();
   const [query, setQuery] = useState("");
   const loadMoreRef = useRef(null);
+
   const debouncedQuery = useDebounce(query, 400);
+
   const {
     users,
     loading: usersLoading,
     error: usersError,
   } = useSearchUsers(debouncedQuery);
+
   const [selectedUser, setSelectedUser] = useState(null);
+
   const {
     repos,
     loading: reposLoading,
@@ -50,7 +38,9 @@ const Index = () => {
     hasMore,
     loadMore,
   } = useUserRepos(selectedUser?.login ?? null);
+
   const { bookmarks, toggle: toggleBookmark, isBookmarked } = useBookmarks();
+
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [sortBy, setSortBy] = useState("updated");
   const [filterLang, setFilterLang] = useState("");
@@ -92,9 +82,7 @@ const Index = () => {
     if (!hasMore || reposLoading || showBookmarks) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          loadMore();
-        }
+        if (entries[0].isIntersecting) loadMore();
       },
       { rootMargin: "100px" },
     );
@@ -136,14 +124,15 @@ const Index = () => {
               {/* Back + Title */}
               <div className="flex items-center gap-3 mb-4">
                 <button
+                  className="p-2 rounded-lg hover:bg-muted transition-colors cursor-pointer"
                   onClick={() => {
                     setSelectedUser(null);
                     setShowBookmarks(false);
                   }}
-                  className="p-2 rounded-lg hover:bg-muted transition-colors"
                 >
                   <ArrowLeft className="h-5 w-5 text-muted-foreground" />
                 </button>
+
                 <div className="flex items-center gap-3">
                   {selectedUser && !showBookmarks && (
                     <img

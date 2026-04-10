@@ -40,11 +40,11 @@ const RepoCard = ({ repo, bookmarked, onToggleBookmark }) => {
         )}
         <span className="flex items-center gap-1">
           <Star className="h-3.5 w-3.5 text-star" />
-          {repo.stargazers_count.toLocaleString()}
+          {repo.stargazers_count.toString()}
         </span>
         <span className="flex items-center gap-1">
           <GitFork className="h-3.5 w-3.5 text-fork" />
-          {repo.forks_count.toLocaleString()}
+          {repo.forks_count.toString()}
         </span>
       </div>
     </div>

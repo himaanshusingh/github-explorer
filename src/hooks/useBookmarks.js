@@ -1,13 +1,10 @@
 import { useState, useCallback } from "react";
 
 const KEY = "bookmarks";
-
-function load() {
-  return JSON.parse(localStorage.getItem(KEY) || "[]");
-}
+const getLocalBookmarks = () => JSON.parse(localStorage.getItem(KEY) || "[]");
 
 export function useBookmarks() {
-  const [bookmarks, setBookmarks] = useState(load);
+  const [bookmarks, setBookmarks] = useState(getLocalBookmarks);
 
   const toggle = useCallback((repo) => {
     setBookmarks((prev) => {
@@ -20,10 +17,9 @@ export function useBookmarks() {
     });
   }, []);
 
-  const isBookmarked = useCallback(
-    (id) => bookmarks.some((r) => r.id === id),
-    [bookmarks],
-  );
+  const isBookmarked = useCallback((id) =>{
+    return bookmarks.some((r) => r.id === id)
+  }, [bookmarks]);
 
   return { bookmarks, toggle, isBookmarked };
 }
