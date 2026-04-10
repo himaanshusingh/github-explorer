@@ -11,12 +11,12 @@ const RepoCard = ({ repo, bookmarked, onToggleBookmark }) => {
           className="font-semibold text-primary hover:underline flex items-center gap-1 min-w-0"
         >
           <span className="truncate">{repo.name}</span>
-          <ExternalLink className="h-3.5 w-3.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
         </a>
 
         <button
           onClick={() => onToggleBookmark(repo)}
-          className="p-1.5 rounded-lg hover:bg-muted transition-colors flex-shrink-0"
+          className="p-1.5 rounded-lg hover:bg-muted transition-colors shrink-0"
           title={bookmarked ? "Remove bookmark" : "Bookmark"}
         >
           <Bookmark
