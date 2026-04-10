@@ -17,7 +17,11 @@ const defaults = {
 const StateMessage = ({ type, message }) => (
   <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
     {icons[type]}
-    <p className={`text-sm ${type === "error" ? "text-destructive" : "text-muted-foreground"}`}>{message || defaults[type]}</p>
+    <p
+      className={`text-sm ${type === "error" ? "text-destructive" : "text-muted-foreground"}`}
+    >
+      {message || defaults[type]}
+    </p>
   </div>
 );
 

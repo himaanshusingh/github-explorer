@@ -7,8 +7,14 @@ const UserCard = ({ user, selected, onSelect }) => (
         : "border-input bg-card hover:border-primary/40 hover:shadow-sm"
     }`}
   >
-    <img src={user.avatar_url} alt={user.login} className="w-10 h-10 rounded-full object-cover" />
-    <span className="font-medium text-card-foreground truncate">{user.login}</span>
+    <img
+      src={user.avatar_url}
+      alt={user.login}
+      className="w-10 h-10 rounded-full object-cover"
+    />
+    <span className="font-medium text-card-foreground truncate">
+      {user.login}
+    </span>
   </button>
 );
 

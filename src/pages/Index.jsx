@@ -3,18 +3,34 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 
 // Local Modules :-
-import Header from "@/components/Header";
-import SearchBar from "@/components/SearchBar";
-import UserCard from "@/components/UserCard";
-import RepoCard from "@/components/RepoCard";
-import RepoFilters from "@/components/RepoFilters";
-import StateMessage from "@/components/StateMessage";
+import Header from "../components/Header";
+import SearchBar from "../components/SearchBar";
+import UserCard from "../components/UserCard";
+import RepoCard from "../components/RepoCard";
+import RepoFilters from "../components/RepoFilters";
+import StateMessage from "../components/StateMessage";
 
 // Custom Hooks :-
-import { useDebounce } from "@/hooks/useDebounce";
-import { useSearchUsers, useUserRepos } from "@/hooks/useGitHub";
-import { useBookmarks } from "@/hooks/useBookmarks";
-import { useTheme } from "@/hooks/useTheme";
+import { useDebounce } from "../hooks/useDebounce";
+import { useSearchUsers, useUserRepos } from "../hooks/useGitHub";
+import { useBookmarks } from "../hooks/useBookmarks";
+import { useTheme } from "../hooks/useTheme";
+
+/**
+ * Index Page Component
+ *
+ * This is the main orchestrator component of the application. It acts as the
+ * "smart" container, maintaining the application's core state and business logic.
+ *
+ * Key Responsibilities:
+ * - Manages the master search state and debounces user inputs via `useDebounce`.
+ * - Interacts with custom hooks (`useSearchUsers`, `useUserRepos`, `useBookmarks`, `useTheme`)
+ *   to fetch data and manage side-effects.
+ * - Handles the display logic toggling between the User Search View,
+ *   the User Repositories View, and the Bookmarks View.
+ * - Manages pagination (infinite scrolling) for repositories using the Intersection Observer API.
+ * - Manages client-side sorting and filtering for the displayed repositories list.
+ */
 
 const Index = () => {
   const { dark, toggle: toggleTheme } = useTheme();
