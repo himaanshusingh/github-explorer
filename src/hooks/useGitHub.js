@@ -14,9 +14,7 @@ export function useSearchUsers(query) {
 
     (async function () {
       try {
-        const res = await axios.get(
-          `https://api.github.com/search/users?q=${encodeURIComponent(query)}&per_page=12`,
-        );
+        const res = await axios.get(`https://api.github.com/search/users?q=${encodeURIComponent(query)}&per_page=12`); // prettier-ignore
         setUsers(res.data.items || []);
       } catch (err) {
         console.log(err);
@@ -51,14 +49,10 @@ export function useUserRepos(username) {
 
     (async function () {
       try {
-        const res = await axios.get(
-          `https://api.github.com/users/${username}/repos?per_page=30&page=${page}&sort=updated`,
-        );
+        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=30&page=${page}&sort=updated`);
         // If it's page 2+, append the new data to the existing repos.
-        setRepos((prevRepos) =>
-          page === 1 ? res.data : [...prevRepos, ...res.data],
-        );
-        // If we got exactly 30 repos, there MIGHT be more on the next page
+        setRepos((prevRepos) => page === 1 ? res.data : [...prevRepos, ...res.data]);
+        // If we got exactly 30 repos, there MIGHT be more on the next page.
         setHasMore(res.data.length === 30);
       } catch (err) {
         console.log(err);
@@ -67,8 +61,8 @@ export function useUserRepos(username) {
       } finally {
         setLoading(false);
       }
-    })();
-  }, [username, page]); 
+    })(); // prettier-ignore
+  }, [username, page]);
 
   const loadMore = useCallback(() => {
     if (hasMore && !loading) setPage((prevPage) => prevPage + 1);
